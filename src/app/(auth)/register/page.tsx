@@ -17,6 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -38,6 +39,8 @@ const RegisterFormSchema = z
   );
 
 const RegisterPage = (props: Props) => {
+  const { push } = useRouter();
+
   const registerForm = useForm<z.infer<typeof RegisterFormSchema>>({
     resolver: zodResolver(RegisterFormSchema),
     defaultValues: {
@@ -46,8 +49,21 @@ const RegisterPage = (props: Props) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof RegisterFormSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof RegisterFormSchema>) => {
+    console.log("VALUES", values);
+
+    const res = await fetch("api/user/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+    // res
+    if (res.status == 200) {
+      push("/");
+    }
+    // res.json();
   };
 
   return (
