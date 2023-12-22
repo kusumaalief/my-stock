@@ -1,3 +1,4 @@
+import Logo from "@/components/Logo";
 import React from "react";
 
 type Props = {
@@ -5,7 +6,16 @@ type Props = {
 };
 
 const AuthLayout = ({ children }: Props) => {
-  return <div>{children}</div>;
+  return (
+    <div className="w-screen h-screen grid-cols-2 grid place-items-center overflow-x-hidden">
+      <div>
+        <Logo className="text-5xl" />
+        <p className="mt-2 text-zinc-800">Inventory Management System</p>
+      </div>
+
+      <div>{children}</div>
+    </div>
+  );
 };
 
 export default AuthLayout;

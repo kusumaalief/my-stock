@@ -1,12 +1,15 @@
+import { cn } from "@/lib/utils";
 import { Radius } from "lucide-react";
 import React from "react";
 
-type Props = {};
+type Props = {
+  className: string;
+};
 
-const Logo = (props: Props) => {
+const Logo = ({ className }: Props) => {
   return (
     <div>
-      <h3 className="logo text-white flex">
+      <h3 className={cn("logo flex", className)}>
         myStock
         <Radius className="ml-1" />
       </h3>

@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <main className="flex h-screen min-h-screen justify-between">
       <div className="sidebar">
-        <Logo />
+        <Logo className="text-white" />
         <Sidemenu />
       </div>
       <div className="flex-1 h-full p-6">
