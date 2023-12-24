@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 type Props = {};
 
@@ -40,6 +41,7 @@ const RegisterFormSchema = z
 
 const RegisterPage = (props: Props) => {
   const { push } = useRouter();
+  const { toast } = useToast();
 
   const registerForm = useForm<z.infer<typeof RegisterFormSchema>>({
     resolver: zodResolver(RegisterFormSchema),
@@ -50,8 +52,7 @@ const RegisterPage = (props: Props) => {
   });
 
   const onSubmit = async (values: z.infer<typeof RegisterFormSchema>) => {
-    console.log("VALUES", values);
-
+    let data: any;
     const res = await fetch("api/user/register", {
       method: "POST",
       headers: {
@@ -59,11 +60,24 @@ const RegisterPage = (props: Props) => {
       },
       body: JSON.stringify(values),
     });
-    // res
-    if (res.status == 200) {
-      push("/");
+    data = await res.json();
+
+    console.log("res", data);
+
+    if (data.statusCode == 200) {
+      toast({
+        variant: "success",
+        title: "You've been registered !",
+        description: "You can login now.",
+      });
+      setTimeout(() => (push("/login"), 5000));
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Something went wrong !",
+        description: "Try again later.",
+      });
     }
-    // res.json();
   };
 
   return (

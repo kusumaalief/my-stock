@@ -15,7 +15,6 @@ const db = getFirestore(firebaseApp);
 // export async function retrieveData(collectionName:string)
 
 export async function signUp(userData: any, callback: Function) {
-  console.log("SIGNUp", userData);
   const q = query(
     collection(db, "users"),
     where("email", "==", userData.email)

@@ -1,4 +1,5 @@
 import Logo from "@/components/Logo";
+import { Toaster } from "@/components/ui/toaster";
 import React from "react";
 
 type Props = {
@@ -14,6 +15,7 @@ const AuthLayout = ({ children }: Props) => {
       </div>
 
       <div>{children}</div>
+      <Toaster />
     </div>
   );
 };
