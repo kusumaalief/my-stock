@@ -9,3 +9,15 @@ interface IFDashboardData {
   value: string;
   lastUpdated: string;
 }
+
+interface IFUserData {
+  username: string;
+  email?: string;
+  password: string;
+}
+
+interface IFResponse {
+  status?: boolean;
+  statusCode?: number;
+  message?: string;
+}

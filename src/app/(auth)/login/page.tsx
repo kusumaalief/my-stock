@@ -16,6 +16,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/router";
 
 type Props = {};
 
@@ -26,6 +28,9 @@ const LoginFormSchema = z.object({
 });
 
 const LoginPage = (props: Props) => {
+  const { push } = useRouter();
+  const { toast } = useToast();
+
   const loginForm = useForm<z.infer<typeof LoginFormSchema>>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {
@@ -34,8 +39,27 @@ const LoginPage = (props: Props) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof LoginFormSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof LoginFormSchema>) => {
+    let data: IFResponse;
+    const res = await fetch("api/user/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
+    data = await res.json();
+    if (data.statusCode == 200) {
+      toast({
+        variant: "success",
+        title: "Login Success !",
+      });
+      setTimeout(() => push("/dashboard"));
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Login Failed",
+        description: "Make sure you enter correct data !",
+      });
+    }
   };
 
   return (

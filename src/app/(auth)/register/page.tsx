@@ -52,7 +52,7 @@ const RegisterPage = (props: Props) => {
   });
 
   const onSubmit = async (values: z.infer<typeof RegisterFormSchema>) => {
-    let data: any;
+    let data: IFResponse;
     const res = await fetch("api/user/register", {
       method: "POST",
       headers: {
