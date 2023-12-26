@@ -12,11 +12,12 @@ interface IFDashboardData {
 
 interface IFUserData {
   username: string;
-  email?: string;
+  email: string;
   password: string;
 }
 
 interface IFResponse {
+  data?: { username: string; email: string };
   status?: boolean;
   statusCode?: number;
   message?: string;

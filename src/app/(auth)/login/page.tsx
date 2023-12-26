@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -36,23 +36,29 @@ const LoginPage = (props: Props) => {
     defaultValues: {
       username: "",
       email: "",
+      password: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof LoginFormSchema>) => {
-    let data: IFResponse;
+    let data: any;
+
     const res = await fetch("api/user/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     });
     data = await res.json();
+
     if (data.statusCode == 200) {
       toast({
         variant: "success",
         title: "Login Success !",
       });
-      setTimeout(() => push("/dashboard"));
+      console.log(data.data);
+      setTimeout(() => push("/"), 2000);
+      localStorage.setItem("username", data.data.username);
+      localStorage.setItem("email", data.data.email);
     } else {
       toast({
         variant: "destructive",

@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   let res: IFResponse = {};
   let data = await req.json();
-  await signUp(data, (status: boolean) => {
+  await signUp(data, ({ status }: { status: boolean }) => {
     if (status) {
       res = {
         status: status,
