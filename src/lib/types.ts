@@ -17,7 +17,7 @@ interface IFUserData {
 }
 
 interface IFResponse {
-  data?: { username: string; email: string };
+  data?: {};
   status?: boolean;
   statusCode?: number;
   message?: string;

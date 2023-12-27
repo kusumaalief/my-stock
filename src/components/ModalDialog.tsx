@@ -15,22 +15,23 @@ import { Input } from "./ui/input";
 
 type ModalDialogProps = {
   variant?: "success";
-  title: string;
+  buttonTitle: string;
   children: React.ReactNode;
 };
 
-function ModalDialog({ variant, title, children }: ModalDialogProps) {
+function ModalDialog({ variant, buttonTitle, children }: ModalDialogProps) {
   return (
-    <div>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant={variant}>{title}</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] bg-white">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant={variant}>{buttonTitle}</Button>
+      </DialogTrigger>
+      <DialogContent className="bg-white w-[340px] md:w-[720px]">
+        <div className="relative">
+          <div className="absolute left-1/2 top-1/2 -translate-y-1/2 w-[2px] h-[90%] bg-gray-300"></div>
           {children}
-        </DialogContent>
-      </Dialog>
-    </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
 

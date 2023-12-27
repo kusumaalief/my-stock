@@ -4,7 +4,6 @@ import {
   getDocs,
   getFirestore,
   query,
-  snapshotEqual,
   where,
 } from "firebase/firestore";
 import firebaseApp from ".";

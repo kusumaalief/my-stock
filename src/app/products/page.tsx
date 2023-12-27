@@ -31,13 +31,12 @@ type Props = {};
 
 const ProductsPage = (props: Props) => {
   const [toggleModal, setToggleModal] = useState<boolean>(false);
-  const onSubmit = async () => {
-    console.log("SUBMIT");
-  };
 
-  // const showDialogModal = () => {
-  //   setShowModal(!showModal)
-  // };
+  const fetchData = async () => {
+    const result = fetch("api/products", {
+      method: "GET",
+    });
+  };
 
   return (
     <div>
@@ -45,7 +44,7 @@ const ProductsPage = (props: Props) => {
         <CardHeader className="flex flex-row justify-between">
           <CardTitle>Product</CardTitle>
 
-          <ModalDialog title="Add Product">
+          <ModalDialog buttonTitle="Add Product">
             <DialogHeader>
               <DialogTitle>New Product</DialogTitle>
             </DialogHeader>
