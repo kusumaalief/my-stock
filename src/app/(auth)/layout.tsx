@@ -15,7 +15,6 @@ const AuthLayout = ({ children }: Props) => {
       </div>
 
       <div>{children}</div>
-      <Toaster />
     </div>
   );
 };

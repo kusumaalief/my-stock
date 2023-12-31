@@ -4,21 +4,25 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   let res: IFResponse = {};
   let data = await req.json();
-  await addProduct(data, ({ status }: { status: boolean }) => {
-    if (status) {
-      res = {
-        status: status,
-        statusCode: 200,
-        message: "success",
-      };
-    } else {
-      res = {
-        status: status,
-        statusCode: 400,
-        message: "failed",
-      };
+  await addProduct(
+    data,
+    ({ status, message }: { status: boolean; message: string }) => {
+      console.log("status", status);
+      if (status) {
+        res = {
+          status: status,
+          statusCode: 200,
+          message: "success",
+        };
+      } else {
+        res = {
+          status: status,
+          statusCode: 400,
+          message: message,
+        };
+      }
     }
-  });
+  );
   return NextResponse.json(res);
 }
 

@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Table,
@@ -24,19 +24,21 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
 import AddProduct from "@/components/product/AddProduct";
 
 type Props = {};
 
 const ProductsPage = (props: Props) => {
-  const [toggleModal, setToggleModal] = useState<boolean>(false);
+  const [data, setData] = useState<{} | null>({});
 
-  const fetchData = async () => {
-    const result = fetch("api/products", {
-      method: "GET",
-    });
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetch("api/products");
+      const data = await result.json();
+      setData(data);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div>
