@@ -62,7 +62,7 @@
   }
 
   .sidebar {
-    @apply w-64 bg-marianblue h-full text-white p-6;
+    @apply w-64 bg-marianblue  text-white p-6;
   }
   h1 {
     @apply font-extrabold text-5xl;

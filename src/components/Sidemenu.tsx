@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import Logo from "./Logo";
 
 type Props = {};
 
@@ -34,20 +35,23 @@ const sideMenu = [
 
 const Sidemenu = (props: Props) => {
   return (
-    <div className="flex flex-col mt-8">
-      <ul className="space-y-2 text-lg ">
-        {sideMenu.map(({ link, title, icon }: IFSideMenu) => (
-          <li
-            key={title}
-            className="hover:bg-indigo-950 transition-all duration-200 ease-in-out py-2 px-4"
-          >
-            <Link href={link} className="flex text-zinc-100">
-              {icon}
-              <span className="ml-2">{title}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+    <div className="sidebar">
+      <Logo className="text-white" />
+      <div className="flex flex-col mt-8">
+        <ul className="space-y-2 text-lg ">
+          {sideMenu.map(({ link, title, icon }: IFSideMenu) => (
+            <li
+              key={title}
+              className="hover:bg-indigo-950 transition-all duration-200 ease-in-out py-2 px-4"
+            >
+              <Link href={link} className="flex text-zinc-100">
+                {icon}
+                <span className="ml-2">{title}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
